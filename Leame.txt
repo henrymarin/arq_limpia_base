@@ -1,0 +1,11 @@
+STS: C:\Users\henry.marin\Downloads\STS-3.9.11--JAVA-8\sts-bundle\sts-3.9.11.RELEASE
+WorkSpace: C:\Users\henry.marin\Documents\workspace-sts-3.9.11.RELEASE
+Swagger: http://localhost:9002/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/formapago
+Servce: http://localhost:9002/formapago/1
+Resumen:
+	microservicio de referencia, basado en arquitectura limpia, con conexión a una DB postgreSQL,
+	que utiliza mapStruct como mapeador de objectos entre DB y JAVA, tiene configurado Swagger,
+	al igual que varios adapratadores de log, de jpa, de operaciones con un archivo de excel;
+	con el pluging de cobertura instalado, y con un proyecto test de pruebas de aceptación (Karate)
+	y de rendimiento (jmeter).
+

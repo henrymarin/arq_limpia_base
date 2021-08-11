@@ -1,0 +1,55 @@
+allprojects {
+    apply plugin: 'net.saliman.cobertura'
+    repositories {
+       mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'net.saliman.cobertura'
+    apply plugin: "java"
+    apply plugin: 'io.spring.dependency-management'
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    dependencies {
+    	testCompile group: 	'junit', name: 'junit', version: '4.12'
+    	testImplementation 	'org.springframework.boot:spring-boot-starter-test'
+        implementation 		'org.springframework.boot:spring-boot-starter-validation'
+        compile("mysql:mysql-connector-java:5.1.46")
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        implementation platform('software.amazon.awssdk:bom:2.15.0')
+    	implementation(group: 'software.amazon.awssdk', name: 'regions')
+    	implementation(group: 'software.amazon.awssdk', name: 'ssm')
+		implementation 'org.springdoc:springdoc-openapi-webmvc-core:1.5.9'
+		implementation 'org.springdoc:springdoc-openapi-ui:1.5.9'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"           
+        }
+    }
+
+    cobertura {
+        coverageFormats = [ 'xml', 'html' ]
+    }
+    test.finalizedBy(project.tasks.cobertura)
+}
+
+
+def files = subprojects.collect { new File(it.projectDir, '/build/cobertura/cobertura.ser') }
+cobertura {
+    coverageFormats = [ 'xml', 'html' ]
+    coverageSourceDirs = subprojects.sourceSets.main.allSource.srcDirs.flatten()
+    coverageMergeDatafiles = files
+}
+
+test.finalizedBy(project.tasks.cobertura)
+
+subprojects.each {project ->
+    test.dependsOn(":" + project.name + ":test")
+}

@@ -1,0 +1,50 @@
+app:
+  environment: local
+  account: hmmarin
+  max-pool-size: 1
+  cargue-masivo.secreto: 12345678
+  
+server:
+  port: 9002
+  #servlet:
+    #context-path: /payment-order
+spring:
+  application:
+    name: ModuloCausacionPagos
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://localhost:5432/postgres?currentSchema=horusddb
+    #username: postgres
+    #password: Papapa12345678
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  #jpa:
+    #properties:
+      #hibernate:
+        #id:
+          #new_generator_mappings: true
+        #show_sql: true
+        #format_sql: true
+#logging:
+  #level:
+    #org:
+      #hibernate:
+        #type: notrace    
+db:
+  secret:
+    region: us-east-1
+    name: horus-dev-secretrds-CNX
+    url: jdbc:postgresql://%s:%s/%s?useSSL=false&serverTimezone=America/Bogota
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never 
+ 

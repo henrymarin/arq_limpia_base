@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "#{name}#"
+  namespace: "#{namespace}#"
+data:
+  APP_ENVIROMENT: "#{env}#"
+  RDS_SECRET_NAME: "#{rdsSecretName}#"
+  APP_ACCOUNT: "#{account}#"
+  AZURE_CLIENT_ID: "#{azureClientId}#"
+  AZURE_TENANT_ID: "#{azureTenantId}#"
+  SCHEMA: "#{schema}#"
+  MAX_POOL: "#{maxPool}#"
+  CARGUE_MASIVO_SECRETO: "#{cargueMasivoSecreto}#"
